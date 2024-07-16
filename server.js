@@ -1,10 +1,21 @@
 const express = require('express');
+const sequelize = require('./config/connection');
+const controllers = require('./controllers');
+//const model = require('./models/Blog');
 
-
-const PORT = process.env.PORT || 3001;
 
 const app = express();
+const PORT = process.env.PORT || 3001;
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-    });
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(controllers);
+
+
+sequelize.sync().then(() => {   
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+        });
+});
