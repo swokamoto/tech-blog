@@ -1,7 +1,13 @@
 const express = require('express');
 const sequelize = require('./config/connection');
 const controllers = require('./controllers');
+
+
+// instantiate the Blog model
 //const model = require('./models/Blog');
+
+
+
 
 
 const app = express();
